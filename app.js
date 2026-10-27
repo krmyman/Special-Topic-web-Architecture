@@ -14,7 +14,7 @@ const translations = {
     '探索': 'Explore', '首頁': 'Home', '人氣排行': 'Popular', '飲品消息': 'Tea & News', '附近店家': 'Nearby', '風味關係': 'Flavor Map', '回饋': 'Feedback', '對話內容': 'Chat messages', '可互動的飲品風味關係圖': 'Interactive drink flavor map', '頁面風格': 'Appearance',
     '主要導覽': 'Main navigation', '茶感首頁': 'Tea Sense home', '今天喝什麼？': 'What sounds good today?', '告訴我們你的心情': 'Tell us how you feel', '訪客模式': 'Guest mode', '個人化設定': 'Personalize',
     '偏好設定': 'Preferences', '開啟選單': 'Open menu', 'YOUR DAILY CUP': 'YOUR DAILY CUP', '找到今天的': 'Find today’s ', '好味道': 'good taste', '說說你的心情，讓我們一起找杯剛剛好的飲料。': 'Tell us how you feel and we’ll find a drink that fits.',
-    '午後微暖': 'Warm afternoon', '適合來點清爽的': 'Perfect for something refreshing', '茶感小助手': 'Tea Sense Assistant', '隨時為你找靈感': 'Here to inspire your next sip', '清除對話': 'Clear chat',
+    '午後微暖': 'Warm afternoon', '適合來點清爽的': 'Perfect for something refreshing', '開啟首頁時會詢問位置權限，用於尋找附近店家；不會持續追蹤。': 'On the homepage, we’ll ask to use your location to find nearby shops. We won’t track you in the background.', '首頁載入時會詢問位置權限，用於附近探索': 'Location permission is requested when the homepage opens to help explore nearby.', '茶感小助手': 'Tea Sense Assistant', '隨時為你找靈感': 'Here to inspire your next sip', '清除對話': 'Clear chat',
     '現在': 'Now', '嗨！今天想喝點什麼呢？可以告訴我你的心情、口味，或是想避開的食材。': 'Hi! What are you in the mood for? Tell me a flavor you like, how you feel, or an ingredient to avoid.', '今日靈感': 'Today’s pick', '桂花烏龍鮮奶茶': 'Osmanthus Oolong Milk Tea', '茶香溫潤 · 微糖少冰': 'Fragrant and mellow · Less sugar, light ice',
     '快速需求': 'Quick prompts', '今天有點累，想喝清爽的': 'I feel tired; recommend something refreshing', '推薦低熱量的飲料': 'Recommend a low-calorie drink', '我今天心情不錯，想喝茶': 'I’m in a good mood and would like tea', '無咖啡因又不太甜的飲料': 'A caffeine-free drink that is not too sweet', '想喝清爽的': 'Something refreshing', '低熱量': 'Low calorie', '好心情': 'Good mood', '輸入飲品需求': 'Enter your drink preferences', '輸入你的飲品需求…': 'Tell us what you feel like drinking…', '送出訊息': 'Send message', '試試看：': 'Try: ', '無咖啡因又不太甜': 'Caffeine-free and not too sweet', '你的偏好只用來推薦': 'Your preferences are only used for recommendations',
     '今天的偏好': 'Your preferences', '調整條件，讓推薦更貼近你。': 'Fine-tune your preferences for better suggestions.', '熱量': 'Calories', '不限': 'Any', '不限茶種': 'Any tea', '咖啡因': 'Caffeine', '飲料配料': 'Toppings', '珍珠、椰果': 'Boba, coconut jelly', '珍珠': 'Boba', '椰果': 'Coconut jelly', '仙草': 'Grass jelly', '不加配料': 'No toppings', '心情': 'Mood', '選擇你的心情': 'Choose your mood', '放鬆': 'Relax', '想放鬆': 'Relax', '提振精神': 'Energy boost', '開心': 'Happy', '心情愉快': 'Feeling good', '茶種': 'Tea type', '烏龍茶': 'Oolong', '紅茶': 'Black tea', '綠茶': 'Green tea', '花草茶': 'Herbal tea', '過敏原': 'Allergens', '尚未設定': 'Not set', '乳製品': 'Dairy', '堅果': 'Nuts', '蜂蜜': 'Honey', '大豆': 'Soy', '低於 150 大卡': 'Under 150 kcal', '低於 300 大卡': 'Under 300 kcal', '低咖啡因': 'Low caffeine', '無咖啡因': 'Caffeine-free', '套用偏好': 'Apply preferences',
@@ -33,7 +33,7 @@ const translations = {
     '探索': '探索', '首頁': 'ホーム', '人氣排行': '人気ランキング', '飲品消息': 'ドリンクニュース', '附近店家': '近くのお店', '風味關係': '風味マップ', '回饋': 'フィードバック', '對話內容': 'チャットメッセージ', '可互動的飲品風味關係圖': 'ドリンク風味のインタラクティブマップ', '頁面風格': 'テーマ',
     '主要導覽': 'メインナビゲーション', '茶感首頁': '茶感ホーム', '今天喝什麼？': '今日は何を飲もう？', '告訴我們你的心情': '今の気分を教えてください', '訪客模式': 'ゲストモード', '個人化設定': '設定',
     '偏好設定': '設定', '開啟選單': 'メニューを開く', 'YOUR DAILY CUP': '今日の一杯', '找到今天的': '今日の', '好味道': 'お気に入りを見つけよう', '說說你的心情，讓我們一起找杯剛剛好的飲料。': '気分を教えてください。ぴったりの一杯を一緒に探しましょう。',
-    '午後微暖': '午後は穏やか', '適合來點清爽的': 'さっぱりした一杯にぴったり', '茶感小助手': 'Tea Sense アシスタント', '隨時為你找靈感': '次の一杯をご提案します', '清除對話': '会話をクリア',
+    '午後微暖': '午後は穏やか', '適合來點清爽的': 'さっぱりした一杯にぴったり', '開啟首頁時會詢問位置權限，用於尋找附近店家；不會持續追蹤。': 'ホームを開くと、近くのお店を探すために位置情報の許可を確認します。常時追跡は行いません。', '首頁載入時會詢問位置權限，用於附近探索': 'ホームの読み込み時に、近くを探すため位置情報の許可を確認します。', '茶感小助手': 'Tea Sense アシスタント', '隨時為你找靈感': '次の一杯をご提案します', '清除對話': '会話をクリア',
     '現在': '今', '嗨！今天想喝點什麼呢？可以告訴我你的心情、口味，或是想避開的食材。': 'こんにちは！今日は何を飲みたいですか？気分や好み、避けたい食材を教えてください。', '今日靈感': '今日のおすすめ', '桂花烏龍鮮奶茶': '桂花ウーロンミルクティー', '茶香溫潤 · 微糖少冰': 'まろやかな茶の香り · 甘さ控えめ・氷少なめ',
     '快速需求': 'クイックリクエスト', '今天有點累，想喝清爽的': '少し疲れたので、さっぱりしたものが飲みたい', '推薦低熱量的飲料': '低カロリーの飲み物をおすすめして', '我今天心情不錯，想喝茶': '今日は気分がいいので、お茶が飲みたい', '無咖啡因又不太甜的飲料': 'カフェイン控えめで甘さ控えめの飲み物', '想喝清爽的': 'さっぱりしたもの', '低熱量': '低カロリー', '好心情': '気分よく', '輸入飲品需求': '飲み物の希望を入力', '輸入你的飲品需求…': '飲みたいものを入力してください…', '送出訊息': 'メッセージを送信', '試試看：': 'おすすめ：', '無咖啡因又不太甜': 'カフェイン控えめで甘さ控えめ', '你的偏好只用來推薦': '設定はおすすめのためだけに使用します',
     '今天的偏好': '今日の好み', '調整條件，讓推薦更貼近你。': '好みを選んで、ぴったりの提案に。', '熱量': 'カロリー', '不限': '指定なし', '不限茶種': '茶種指定なし', '咖啡因': 'カフェイン', '飲料配料': 'トッピング', '珍珠、椰果': 'タピオカ、ナタデココ', '珍珠': 'タピオカ', '椰果': 'ナタデココ', '仙草': '仙草ゼリー', '不加配料': 'トッピングなし', '心情': '気分', '選擇你的心情': '気分を選択', '放鬆': 'リラックス', '想放鬆': 'リラックスしたい', '提振精神': '元気を出したい', '開心': '楽しい', '心情愉快': '気分がいい', '茶種': '茶種', '烏龍茶': 'ウーロン茶', '紅茶': '紅茶', '綠茶': '緑茶', '花草茶': 'ハーブティー', '過敏原': 'アレルゲン', '尚未設定': '未設定', '乳製品': '乳製品', '堅果': 'ナッツ', '蜂蜜': 'はちみつ', '大豆': '大豆', '低於 150 大卡': '150 kcal 未満', '低於 300 大卡': '300 kcal 未満', '低咖啡因': 'カフェイン控えめ', '無咖啡因': 'カフェインなし', '套用偏好': '好みを適用',
@@ -52,7 +52,7 @@ const translations = {
     '探索': '둘러보기', '首頁': '홈', '人氣排行': '인기 순위', '飲品消息': '음료 소식', '附近店家': '주변 매장', '風味關係': '풍미 지도', '回饋': '의견', '對話內容': '대화 메시지', '可互動的飲品風味關係圖': '인터랙티브 음료 풍미 지도', '頁面風格': '테마',
     '主要導覽': '주요 메뉴', '茶感首頁': 'Tea Sense 홈', '今天喝什麼？': '오늘은 무엇을 마실까요?', '告訴我們你的心情': '오늘 기분을 알려주세요', '訪客模式': '게스트 모드', '個人化設定': '설정',
     '偏好設定': '설정', '開啟選單': '메뉴 열기', 'YOUR DAILY CUP': '오늘의 한 잔', '找到今天的': '오늘의', '好味道': '취향을 찾아보세요', '說說你的心情，讓我們一起找杯剛剛好的飲料。': '기분을 알려주시면 딱 맞는 음료를 함께 찾아볼게요.',
-    '午後微暖': '따뜻한 오후', '適合來點清爽的': '상큼한 한 잔이 어울려요', '茶感小助手': 'Tea Sense 도우미', '隨時為你找靈感': '다음 한 잔을 추천해 드려요', '清除對話': '대화 지우기',
+    '午後微暖': '따뜻한 오후', '適合來點清爽的': '상큼한 한 잔이 어울려요', '開啟首頁時會詢問位置權限，用於尋找附近店家；不會持續追蹤。': '홈페이지를 열 때 주변 매장을 찾기 위해 위치 권한을 요청합니다. 백그라운드에서 추적하지 않습니다.', '首頁載入時會詢問位置權限，用於附近探索': '홈페이지를 열 때 주변 탐색을 위해 위치 권한을 요청합니다.', '茶感小助手': 'Tea Sense 도우미', '隨時為你找靈感': '다음 한 잔을 추천해 드려요', '清除對話': '대화 지우기',
     '現在': '지금', '嗨！今天想喝點什麼呢？可以告訴我你的心情、口味，或是想避開的食材。': '안녕하세요! 오늘은 어떤 음료가 좋으세요? 기분이나 좋아하는 맛, 피하고 싶은 재료를 알려주세요.', '今日靈感': '오늘의 추천', '桂花烏龍鮮奶茶': '계화 우롱 밀크티', '茶香溫潤 · 微糖少冰': '은은한 차 향 · 당도 낮게, 얼음 적게',
     '快速需求': '빠른 요청', '今天有點累，想喝清爽的': '조금 피곤해서 상큼한 음료를 마시고 싶어요', '推薦低熱量的飲料': '저칼로리 음료를 추천해 주세요', '我今天心情不錯，想喝茶': '오늘 기분이 좋아서 차를 마시고 싶어요', '無咖啡因又不太甜的飲料': '무카페인에 덜 단 음료', '想喝清爽的': '상큼한 음료', '低熱量': '저칼로리', '好心情': '기분 전환', '輸入飲品需求': '음료 취향 입력', '輸入你的飲品需求…': '원하는 음료를 입력하세요…', '送出訊息': '메시지 보내기', '試試看：': '이런 요청은 어때요: ', '無咖啡因又不太甜': '무카페인, 덜 달게', '你的偏好只用來推薦': '선호 정보는 추천에만 사용됩니다',
     '今天的偏好': '오늘의 취향', '調整條件，讓推薦更貼近你。': '취향을 조정해 더 잘 맞는 추천을 받아보세요.', '熱量': '칼로리', '不限': '상관없음', '不限茶種': '차 종류 상관없음', '咖啡因': '카페인', '飲料配料': '토핑', '珍珠、椰果': '펄, 코코넛 젤리', '珍珠': '펄', '椰果': '코코넛 젤리', '仙草': '선초 젤리', '不加配料': '토핑 제외', '心情': '기분', '選擇你的心情': '기분 선택', '放鬆': '휴식', '想放鬆': '편안하게', '提振精神': '기운 내기', '開心': '행복함', '心情愉快': '기분 좋음', '茶種': '차 종류', '烏龍茶': '우롱차', '紅茶': '홍차', '綠茶': '녹차', '花草茶': '허브차', '過敏原': '알레르기 유발 성분', '尚未設定': '설정 안 됨', '乳製品': '유제품', '堅果': '견과류', '蜂蜜': '꿀', '大豆': '대두', '低於 150 大卡': '150 kcal 미만', '低於 300 大卡': '300 kcal 미만', '低咖啡因': '저카페인', '無咖啡因': '무카페인', '套用偏好': '취향 적용',
@@ -87,6 +87,7 @@ function applyLocale(locale) {
   const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
   while (walker.nextNode()) {
     const node = walker.currentNode;
+    if (node.parentElement?.closest('#languageSelect')) continue;
     if (!originalTextNodes.has(node)) originalTextNodes.set(node, node.nodeValue);
     const original = originalTextNodes.get(node);
     const trimmed = original.trim();
@@ -113,7 +114,7 @@ function applyLocale(locale) {
   document.querySelector('#pageHeading').textContent = t(pageNames[page]);
   document.querySelector('#languageSelect').value = currentLocale;
   document.querySelector('#refreshRanking').textContent = t('↻ 更新排行');
-  document.querySelector('#locationStatus').textContent = t('使用目前位置探索周邊');
+  document.querySelector('#locationStatus').textContent = t('首頁載入時會詢問位置權限，用於附近探索');
   document.querySelector('#graphDetail').textContent = t('點選圖上的圓點，探索風味關聯。');
   toast.classList.remove('show');
   toast.textContent = '';
@@ -242,11 +243,11 @@ function renderPlaces() {
   document.querySelector('#placeList').innerHTML = places.map(place => `<div class="place-row"><span class="place-thumb" aria-hidden="true">${place.emoji}</span><span class="place-copy"><strong>${t(place.name)}</strong><small>${t(place.type)}</small></span><span class="place-distance">${place.distance}</span></div>`).join('');
 }
 renderPlaces();
-function locate() {
+function locate({ automatic = false } = {}) {
   const status = document.querySelector('#locationStatus');
   if (!navigator.geolocation) {
     status.textContent = t('此瀏覽器不支援定位，顯示示意店家');
-    showToast(t('瀏覽器目前不支援定位'));
+    if (!automatic) showToast(t('瀏覽器目前不支援定位'));
     return;
   }
   status.textContent = t('正在取得位置…');
@@ -254,12 +255,12 @@ function locate() {
     position => {
       const { latitude, longitude } = position.coords;
       status.textContent = t('已取得位置 {lat}, {lon}；店家仍為示意資料', { lat: latitude.toFixed(3), lon: longitude.toFixed(3) });
-      showToast(t('定位成功；串接地圖資料後即可搜尋附近店家'));
+      if (!automatic) showToast(t('定位成功；串接地圖資料後即可搜尋附近店家'));
     },
     error => {
       const messages = { 1: '你尚未授權定位，顯示示意店家', 2: '目前無法取得位置，顯示示意店家', 3: '定位逾時，顯示示意店家' };
       status.textContent = t(messages[error.code] || '定位失敗，顯示示意店家');
-      showToast(t('未能取得位置，仍可瀏覽示意店家'));
+      if (!automatic) showToast(t('未能取得位置，仍可瀏覽示意店家'));
     }, { enableHighAccuracy: false, timeout: 9000, maximumAge: 60000 },
   );
 }
@@ -381,3 +382,4 @@ try {
   if (storedLocale && Object.hasOwn(localeNames, storedLocale)) savedLocale = storedLocale;
 } catch { /* Use Traditional Chinese when browser storage is unavailable. */ }
 applyLocale(savedLocale);
+if (document.body.dataset.currentPage === 'home') locate({ automatic: true });

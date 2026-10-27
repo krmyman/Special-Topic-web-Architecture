@@ -6,3 +6,5 @@
 
 
 html:lang(ja){--font:'DM Sans','Noto Sans JP','Noto Sans TC',sans-serif}html:lang(ko){--font:'DM Sans','Noto Sans KR','Noto Sans TC',sans-serif}
+
+.location-note{font-size:10px;line-height:1.55;color:#8d978e;margin:9px 0 0;display:flex;align-items:flex-start;gap:5px}.location-note::first-letter{color:var(--green)}
