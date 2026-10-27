@@ -61,6 +61,7 @@ function navigate(page) {
   });
   pages.forEach(section => section.classList.toggle('active', section.id === `page-${page}`));
   document.querySelector('#pageHeading').textContent = pageNames[page];
+  document.querySelector('#resetButton').hidden = page !== 'home';
   history.replaceState(null, '', `#${page}`);
   document.querySelector('.sidebar').classList.remove('open');
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -214,6 +215,9 @@ document.querySelectorAll('.preference-options input').forEach(input => input.ad
 
 const feedbackModal = document.querySelector('#feedbackModal');
 document.querySelector('#feedbackButton').addEventListener('click', () => feedbackModal.showModal());
+document.querySelectorAll('[data-close-dialog]').forEach(button => {
+  button.addEventListener('click', () => button.closest('dialog')?.close());
+});
 document.querySelector('#feedbackForm').addEventListener('submit', event => {
   event.preventDefault();
   feedbackModal.close();
