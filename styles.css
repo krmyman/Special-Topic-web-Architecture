@@ -8,3 +8,75 @@
 html:lang(ja){--font:'DM Sans','Noto Sans JP','Noto Sans TC',sans-serif}html:lang(ko){--font:'DM Sans','Noto Sans KR','Noto Sans TC',sans-serif}
 
 .location-note{font-size:10px;line-height:1.55;color:#8d978e;margin:9px 0 0;display:flex;align-items:flex-start;gap:5px}.location-note::first-letter{color:var(--green)}
+
+/* Night tea palette: keep surfaces dark while lifting text and control contrast. */
+body.dark{
+  --paper:#18211b;
+  --white:#26322a;
+  --ink:#edf3ee;
+  --muted:#bbc8be;
+  --line:#465249;
+  --green:#a6c5a2;
+  --green-soft:#314235;
+  --green-dark:#557e5d;
+  --gold:#d7b678;
+  --gold-soft:#51442e;
+  --rose:#d69b8f;
+  --shadow:0 18px 48px rgba(0,0,0,.28);
+  background:var(--paper);
+  color:var(--ink);
+}
+body.dark .sidebar{background:#1c261f;border-color:#38463c}
+body.dark .main-area,body.dark .topbar{background:#18211b}
+body.dark .nav-link{color:#c2cec4}
+body.dark .nav-link:hover,body.dark .nav-link.active{background:#26322a;color:#e0eee1;box-shadow:0 3px 12px rgba(0,0,0,.2)}
+body.dark .nav-icon,body.dark .side-label,body.dark .eyebrow,body.dark .brand-copy small{color:#bfccc1}
+body.dark .mini-note,body.dark .preference-list,body.dark .preference-item,body.dark .card-top,body.dark .ranking-caption,body.dark .news-source,body.dark .place-list-head,body.dark .place-row,body.dark .graph-toolbar{border-color:#465249}
+body.dark .mini-note small,body.dark .profile-button small,body.dark .breadcrumb,body.dark .crumb-slash,body.dark .lead,body.dark .weather-pill small,body.dark .assistant-id small,body.dark .text-button,body.dark .message-meta,body.dark .message-meta span,body.dark .suggestion-kicker,body.dark .suggestion-card span,body.dark .composer-footer,body.dark .privacy-note,body.dark .preference-item summary small,body.dark .chevron,body.dark .home-footer,body.dark .home-footer span:first-child,body.dark .rank-copy small,body.dark .rank-votes,body.dark .news-category,body.dark .news-copy p,body.dark .news-source,body.dark .source-note,body.dark .map-topline small,body.dark .map-disclaimer,body.dark .place-copy small,body.dark .place-distance,body.dark .place-count,body.dark .graph-toolbar small,body.dark .graph-legend,body.dark .form-modal p,body.dark #loadingModal p,body.dark .location-note{color:#c1cdc3}
+body.dark .icon-button,body.dark .menu-button{background:#26322a;border-color:#465249;color:#e0ebe1}
+body.dark .icon-button:hover,body.dark .menu-button:hover,body.dark .outline-button:hover{background:#35473a;border-color:#718575}
+body.dark .weather-pill,body.dark .bubble,body.dark .composer,body.dark .suggestion-card,body.dark .rank-item{background:#26322a;border-color:#465249;color:#e4ece5}
+body.dark .suggestion-card strong{color:#e3eee4}
+body.dark .prompt-chip{background:#314235;border-color:#56675a;color:#e0ebe1}
+body.dark .prompt-chip:hover{background:#3b5140;border-color:#819785}
+body.dark .composer{border-color:#56665a}
+body.dark .composer input{color:#edf3ee}
+body.dark .composer input::placeholder{color:#bcc8be}
+body.dark .preference-options{color:#d2ddd3}
+body.dark .apply-button,body.dark .primary-button,body.dark .feedback-fab{background:#557e5d;color:#fff}
+body.dark .apply-button:hover,body.dark .primary-button:hover,body.dark .feedback-fab:hover{background:#466f4f}
+body.dark .outline-button,body.dark .view-map-button{background:#314235;border-color:#56675a;color:#e0ebe1}
+body.dark .view-map-button:hover{background:#3b5140}
+body.dark .rank-copy strong,body.dark .news-copy h2,body.dark .map-topline strong,body.dark .place-copy strong,body.dark .graph-toolbar strong,body.dark .section-heading h2,body.dark .breadcrumb strong{color:#edf3ee}
+body.dark .news-copy h2{color:#edf3ee}
+body.dark .graph-detail{background:#314235;color:#d2ddd3}
+body.dark .graph-node:not(.central) text{fill:#18211b}
+body.dark .graph-node.tea circle{fill:#9db59a}
+body.dark .graph-node.flavor circle{fill:#d6b777}
+body.dark .graph-node.topping circle{fill:#d6a091}
+body.dark .graph-node.selected circle{stroke:#edf3ee}
+body.dark .close-modal{color:#d4dfd5}
+body.dark .form-modal select,body.dark .form-modal textarea{background:#202b23;color:#edf3ee;border-color:#56665a}
+body.dark .form-modal select:focus,body.dark .form-modal textarea:focus{border-color:#a6c5a2;box-shadow:0 0 0 2px rgba(166,197,162,.2)}
+body.dark .form-modal select option{background:#202b23;color:#edf3ee}
+body.dark .modal::backdrop{background:rgba(8,14,10,.78)}
+body.dark :focus-visible{outline:2px solid #a6c5a2;outline-offset:2px}
+body.dark .rank-tag{background:#314235;color:#d6e4d7}body.dark .pref-icon{color:#26322a}body.dark .map-scale{background:#e7eadf;color:#26322a}
+
+/* Warm tea palette: keep supporting copy and small labels readable. */
+body:not(.dark){--muted:#626f66}
+body:not(.dark) .eyebrow,body:not(.dark) .side-label,body:not(.dark) .brand-copy small,body:not(.dark) .nav-link,body:not(.dark) .mini-note small,body:not(.dark) .profile-button small,body:not(.dark) .breadcrumb,body:not(.dark) .lead,body:not(.dark) .weather-pill small,body:not(.dark) .assistant-id small,body:not(.dark) .text-button,body:not(.dark) .message-meta,body:not(.dark) .message-meta span,body:not(.dark) .suggestion-kicker,body:not(.dark) .suggestion-card span,body:not(.dark) .composer-footer,body:not(.dark) .privacy-note,body:not(.dark) .preference-item summary small,body:not(.dark) .home-footer,body:not(.dark) .home-footer span:first-child,body:not(.dark) .rank-copy small,body:not(.dark) .rank-votes,body:not(.dark) .news-category,body:not(.dark) .news-copy p,body:not(.dark) .news-source,body:not(.dark) .source-note,body:not(.dark) .map-topline small,body:not(.dark) .map-disclaimer,body:not(.dark) .place-copy small,body:not(.dark) .place-distance,body:not(.dark) .place-count,body:not(.dark) .graph-toolbar small,body:not(.dark) .graph-legend,body:not(.dark) .graph-detail,body:not(.dark) .form-modal p,body:not(.dark) #loadingModal p,body:not(.dark) .location-note{color:#626f66}
+body:not(.dark) .nav-link.active{color:#355e48}
+body:not(.dark) .prompt-chip{color:#526457}
+body:not(.dark) .rank-tag{color:#526457}
+body:not(.dark) .rank-number.gold{color:#806126}
+body:not(.dark) .rank-number.silver{color:#5d6a61}
+body:not(.dark) .rank-number.bronze{color:#80512e}
+body:not(.dark) .rank-number{color:#5d6a61}
+body:not(.dark) .pref-icon.green{color:#496b50}
+body:not(.dark) .pref-icon.gold{color:#795b2d}
+body:not(.dark) .pref-icon.peach{color:#80512e}
+body:not(.dark) .pref-icon.rose{color:#804b45}
+body:not(.dark) .graph-node:not(.central) text{fill:#18211b}
+body:not(.dark) .map-scale{color:#526457}
+body:not(.dark) .close-modal{color:#626f66}
