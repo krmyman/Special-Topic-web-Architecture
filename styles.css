@@ -87,3 +87,5 @@ body{--font-scale:1}
 body[data-font-size="small"]{--font-scale:.9}
 body[data-font-size="medium"]{--font-scale:1}
 body[data-font-size="large"]{--font-scale:1.15}
+.app-version{padding:8px 8px 0;color:#626f66;font-size:calc(9px * var(--font-scale, 1));text-align:right}
+body.dark .app-version{color:#c1cdc3}
