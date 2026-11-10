@@ -460,6 +460,7 @@ document.querySelector('#settingsForm').addEventListener('submit', event => {
   try {
     localStorage.setItem('teaSenseLanguage', selectedLocale);
     localStorage.setItem('teaSenseFontSize', selectedFontSize);
+    localStorage.setItem('teaSenseTheme', document.querySelector('#themeSelect').value);
   } catch { /* Settings remain active for this session. */ }
   preferencesModal.close();
   showToast(t('設定已套用'));
@@ -486,4 +487,9 @@ try {
   if (storedFontSize && Object.hasOwn(fontSizeScales, storedFontSize)) savedFontSize = storedFontSize;
 } catch { /* Use medium text when browser storage is unavailable. */ }
 applyFontSize(savedFontSize);
+let savedTheme = 'light';
+try {
+  if (localStorage.getItem('teaSenseTheme') === 'dark') savedTheme = 'dark';
+} catch { /* Use the warm theme when browser storage is unavailable. */ }
+document.body.classList.toggle('dark', savedTheme === 'dark');
 if (document.body.dataset.currentPage === 'home') locate({ automatic: true });

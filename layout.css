@@ -34,6 +34,8 @@ body.dark.sidebar-expanded .sidebar #preferencesButton,body:not(.dark).sidebar-e
 body.dark .sidebar #preferencesButton svg,body:not(.dark) .sidebar #preferencesButton svg{display:block;width:21px;height:21px;flex:none;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
 body.sidebar-expanded .profile-button{width:100%;justify-content:flex-start;padding:8px}
 body.sidebar-expanded .profile-button>span:not(.avatar){display:block}
+body:not(.sidebar-expanded) .profile-button{width:46px;height:46px;justify-content:center;margin:0 auto;padding:0}
+body:not(.sidebar-expanded) .profile-button>span:not(.avatar){display:none}
 body.sidebar-expanded .app-version{width:100%;text-align:center}
 body.dark .app-version{width:100%}
 
@@ -52,6 +54,9 @@ body:not(.dark)[data-current-page="home"] .quick-prompts .prompt-chip{background
 body.dark[data-current-page="home"] .quick-prompts .prompt-chip,body:not(.dark)[data-current-page="home"] .quick-prompts .prompt-chip{min-height:38px;padding:8px 13px;font-size:calc(12px * var(--font-scale,1))}
 body.dark[data-current-page="home"] .composer,body:not(.dark)[data-current-page="home"] .composer{width:100%;min-height:72px;padding:9px 14px;gap:10px;border-radius:28px}
 body.dark[data-current-page="home"] .composer input,body:not(.dark)[data-current-page="home"] .composer input{font-size:calc(16px * var(--font-scale,1))}
+body[data-current-page="home"] .weather-pill{position:fixed;top:78px;right:24px;z-index:11;display:flex;align-items:center;gap:10px;max-width:min(340px,calc(100vw - var(--sidebar-width) - 40px));padding:9px 14px;border-radius:18px}
+body[data-current-page="home"] .weather-copy{min-width:0}
+body[data-current-page="home"] .weather-copy small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
 /* Submitted chat: edge-to-edge messages without a enclosing card; dock composer. */
 body.dark.conversation-active[data-current-page="home"] .content-wrap,body:not(.dark).conversation-active[data-current-page="home"] .content-wrap{position:fixed;inset:64px 0 0 var(--sidebar-width);width:auto;height:calc(100dvh - 64px);min-height:0;max-width:none;margin:0;padding:22px clamp(24px,4vw,64px) 50px;overflow:hidden;display:block}
@@ -77,8 +82,15 @@ body.dark.conversation-active[data-current-page="home"] .composer,body:not(.dark
 body.dark.conversation-active[data-current-page="home"] .composer-footer,body:not(.dark).conversation-active[data-current-page="home"] .composer-footer{position:fixed;z-index:19;left:calc(var(--sidebar-width) + clamp(24px,4vw,64px));right:clamp(24px,4vw,64px);bottom:9px;justify-content:center;padding:0;pointer-events:none}
 
 /* Preferences float over the page and preserve the existing option design. */
-body.dark[data-current-page="home"] .preference-card[open],body:not(.dark)[data-current-page="home"] .preference-card[open]{position:fixed;z-index:30;left:calc(var(--sidebar-width) + clamp(24px,4vw,64px));bottom:124px;width:min(520px,calc(100vw - var(--sidebar-width) - 48px));max-height:min(72vh,660px);margin:0;padding:22px;overflow:auto;border:1px solid var(--line);border-radius:18px;background:var(--white);box-shadow:var(--shadow);color:var(--ink)}
-body.dark .preference-card[open]{background:#1c1d22;border:1px solid #3b3d48;box-shadow:0 22px 70px #0009;color:#ececf0}
+body.dark[data-current-page="home"] .preference-card[open],body:not(.dark)[data-current-page="home"] .preference-card[open]{display:block;position:fixed;z-index:30;left:calc(var(--sidebar-width) + clamp(24px,4vw,64px));bottom:124px;width:min(520px,calc(100vw - var(--sidebar-width) - 48px));max-height:min(72vh,660px);margin:0;padding:22px;overflow:auto;border:1px solid var(--line);border-radius:18px;background:var(--white);box-shadow:var(--shadow);color:var(--ink)}
+body.dark .preference-card[open]{display:block;background:#202923;border:1px solid #465249;box-shadow:0 22px 70px #0009;color:#f1f5f1}
+body.dark .preference-card[open] .eyebrow{color:#d0ddd1}
+body.dark .preference-card[open] .section-heading h2{color:#f3f6f3}
+body.dark .preference-card[open] .muted{color:#c7d2c8}
+body.dark .preference-card[open] .preference-list,body.dark .preference-card[open] .preference-item{border-color:#465249}
+body.dark .preference-card[open] .preference-item summary strong{color:#f0f4f0}
+body.dark .preference-card[open] .preference-item summary small,body.dark .preference-card[open] .chevron{color:#c7d2c8}
+body.dark .preference-card[open] .preference-options{color:#e1e9e2}
 
 @media(max-width:1050px){body.sidebar-expanded{--sidebar-width:220px}}
 @media(max-width:760px){
@@ -106,6 +118,8 @@ body.dark .preference-card[open]{background:#1c1d22;border:1px solid #3b3d48;box
   body.dark.conversation-active[data-current-page="home"] .composer,body:not(.dark).conversation-active[data-current-page="home"] .composer{left:14px;right:14px;bottom:42px;min-height:64px}
   body.dark.conversation-active[data-current-page="home"] .composer-footer,body:not(.dark).conversation-active[data-current-page="home"] .composer-footer{left:14px;right:14px;bottom:9px;font-size:calc(9px * var(--font-scale,1))}
   body.dark[data-current-page="home"] .preference-card[open],body:not(.dark)[data-current-page="home"] .preference-card[open]{left:12px;bottom:112px;width:calc(100vw - 24px);max-height:72svh;padding:18px}
+  body[data-current-page="home"] .weather-pill{top:70px;right:14px;max-width:calc(100vw - 28px);padding:7px 10px}
+  body.dark[data-current-page="home"] .weather-credit{display:inline;color:#9da6c2;font-size:9px}
   body.dark.conversation-active[data-current-page="home"] .preference-card[open],body:not(.dark).conversation-active[data-current-page="home"] .preference-card[open]{left:12px;bottom:116px}
   body.dark.conversation-active[data-current-page="home"] .chat-messages,body:not(.dark).conversation-active[data-current-page="home"] .chat-messages{inset:54px 0 0;padding:4px 0 16px}
   body.dark.conversation-active[data-current-page="home"] .message-body,body:not(.dark).conversation-active[data-current-page="home"] .message-body{max-width:96%}
