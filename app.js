@@ -69,6 +69,19 @@ const translations = {
     '以聊天探索符合口味與需求的飲品，查看人氣推薦、消息與附近店家。': '대화로 취향에 맞는 음료를 찾고 인기 메뉴, 소식, 주변 매장을 확인하세요.', '茶感 Tea Sense｜飲品探索': 'Tea Sense | 음료 찾기',
   },
 };
+translations.en['重試'] = 'Retry'; translations.ja['重試'] = '再試行'; translations.ko['重試'] = '다시 시도';
+translations.en['品項'] = 'Drink'; translations.ja['品項'] = 'ドリンク'; translations.ko['品項'] = '음료'; translations.en['飲品比較'] = 'Compare drinks'; translations.ja['飲品比較'] = 'ドリンクを比較'; translations.ko['飲品比較'] = '음료 비교'; translations.en['未標示'] = 'Not listed'; translations.ja['未標示'] = '記載なし'; translations.ko['未標示'] = '표시 없음'; translations.en['移除'] = 'Remove'; translations.ja['移除'] = '削除'; translations.ko['移除'] = '삭제';
+translations.en['茶飲'] = 'Tea'; translations.ja['茶飲'] = 'お茶'; translations.ko['茶飲'] = '차'; translations.en['不限'] = 'Any'; translations.ja['不限'] = '指定なし'; translations.ko['不限'] = '무관';
+translations.en['重置對話'] = 'Reset chat'; translations.ja['重置對話'] = '会話をリセット'; translations.ko['重置對話'] = '대화 초기화';
+translations.en['重新推薦'] = 'Regenerate'; translations.ja['重新推薦'] = '再提案'; translations.ko['重新推薦'] = '다시 추천';
+translations.en['刪除'] = 'Delete'; translations.ja['刪除'] = '削除'; translations.ko['刪除'] = '삭제';
+translations.en['飲品類別'] = 'Drink category'; translations.ja['飲品類別'] = 'ドリンクの種類'; translations.ko['飲品類別'] = '음료 종류';
+translations.en['全部類別'] = 'All categories'; translations.ja['全部類別'] = 'すべて'; translations.ko['全部類別'] = '전체';
+translations.en['純茶'] = 'Tea'; translations.ja['純茶'] = 'お茶'; translations.ko['純茶'] = '차'; translations.en['奶茶'] = 'Milk tea'; translations.ja['奶茶'] = 'ミルクティー'; translations.ko['奶茶'] = '밀크티'; translations.en['果茶'] = 'Fruit tea'; translations.ja['果茶'] = 'フルーツティー'; translations.ko['果茶'] = '과일차'; translations.en['其他'] = 'Other'; translations.ja['其他'] = 'その他'; translations.ko['其他'] = '기타';
+translations.en['營業中'] = 'Open'; translations.ja['營業中'] = '営業中'; translations.ko['營業中'] = '영업 중'; translations.en['目前休息'] = 'Closed'; translations.ja['目前休息'] = '営業時間外'; translations.ko['目前休息'] = '영업 종료'; translations.en['沒有符合條件的示範店家'] = 'No sample shops match these filters'; translations.ja['沒有符合條件的示範店家'] = '条件に合うサンプル店舗はありません'; translations.ko['沒有符合條件的示範店家'] = '조건에 맞는 예시 매장이 없습니다';
+translations.en['相關示範飲品'] = 'Related sample drinks'; translations.ja['相關示範飲品'] = '関連するおすすめ例'; translations.ko['相關示範飲品'] = '관련 예시 음료'; translations.en['風味推薦'] = 'flavor suggestion'; translations.ja['風味推薦'] = '風味のおすすめ'; translations.ko['風味推薦'] = '풍미 추천';
+translations.en['示範資料未標示常見過敏原'] = 'No common allergens listed in this sample'; translations.ja['示範資料未標示常見過敏原'] = 'サンプルに一般的なアレルゲンの記載はありません'; translations.ko['示範資料未標示常見過敏原'] = '예시 데이터에 일반 알레르기 유발 성분이 표시되지 않았습니다';
+translations.en['目前示範清單中沒有完全符合條件的品項，以下列出一般示範選項供參考。'] = 'No sample item matches all selected preferences; general examples are shown.'; translations.ja['目前示範清單中沒有完全符合條件的品項，以下列出一般示範選項供參考。'] = '条件に完全一致する例がないため、一般的な候補を表示します。'; translations.ko['目前示範清單中沒有完全符合條件的品項，以下列出一般示範選項供參考。'] = '선택한 조건에 맞는 예시가 없어 일반 예시를 표시합니다.';
 translations.en['相關風味'] = 'Related flavors'; translations.ja['相關風味'] = '関連する風味'; translations.ko['相關風味'] = '관련 풍미'; translations.en['關聯為示範資料'] = 'These connections are illustrative.'; translations.ja['關聯為示範資料'] = '関連性はサンプルデータです。'; translations.ko['關聯為示範資料'] = '연결 정보는 예시 데이터입니다.';
 translations.en['搜尋飲品'] = 'Search drinks'; translations.ja['搜尋飲品'] = 'ドリンクを検索'; translations.ko['搜尋飲品'] = '음료 검색';
 translations.en['搜尋飲品名稱或風味…'] = 'Search drinks or flavors…'; translations.ja['搜尋飲品名稱或風味…'] = 'ドリンク名や風味を検索…'; translations.ko['搜尋飲品名稱或風味…'] = '음료 이름 또는 풍미 검색…';
@@ -228,28 +241,31 @@ const initialPage = location.hash.slice(1);
 if (pageNames[initialPage]) navigate(initialPage);
 
 const drinks = [
-  { name: '桂花烏龍鮮奶茶', detail: '花香烏龍 · 溫潤奶香', emoji: '🧋', votes: '2,480', tag: '人氣冠軍' },
-  { name: '四季春青茶', detail: '清新回甘 · 無負擔', emoji: '🍵', votes: '1,926', tag: '清爽推薦' },
-  { name: '黑糖珍珠鮮奶', detail: '濃郁黑糖 · Q 彈珍珠', emoji: '🥤', votes: '1,674', tag: '經典不敗' },
-  { name: '柚香翡翠', detail: '柚子果香 · 茶韻清甜', emoji: '🍋', votes: '1,438', tag: '果香系' },
-  { name: '冬瓜檸檬', detail: '古早冬瓜 · 清新檸檬', emoji: '🍹', votes: '1,209', tag: '酸甜平衡' },
-  { name: '蜜香紅茶', detail: '天然蜜韻 · 純茶首選', emoji: '🫖', votes: '986', tag: '無奶推薦' },
-  { name: '芋泥波波鮮奶', detail: '綿密芋泥 · 鮮乳香醇', emoji: '🥛', votes: '854', tag: '療癒系' },
-  { name: '百香雙響炮', detail: '百香果香 · 雙料口感', emoji: '🍊', votes: '726', tag: '酸甜果茶' },
-  { name: '桂圓紅棗茶', detail: '桂圓棗香 · 暖心熱飲', emoji: '☕', votes: '613', tag: '暖心推薦' },
+  { category: 'milk', name: '桂花烏龍鮮奶茶', detail: '花香烏龍 · 溫潤奶香', emoji: '🧋', votes: '2,480', tag: '人氣冠軍' },
+  { category: 'tea', name: '四季春青茶', detail: '清新回甘 · 無負擔', emoji: '🍵', votes: '1,926', tag: '清爽推薦' },
+  { category: 'milk', name: '黑糖珍珠鮮奶', detail: '濃郁黑糖 · Q 彈珍珠', emoji: '🥤', votes: '1,674', tag: '經典不敗' },
+  { category: 'fruit', name: '柚香翡翠', detail: '柚子果香 · 茶韻清甜', emoji: '🍋', votes: '1,438', tag: '果香系' },
+  { category: 'fruit', name: '冬瓜檸檬', detail: '古早冬瓜 · 清新檸檬', emoji: '🍹', votes: '1,209', tag: '酸甜平衡' },
+  { category: 'tea', name: '蜜香紅茶', detail: '天然蜜韻 · 純茶首選', emoji: '🫖', votes: '986', tag: '無奶推薦' },
+  { category: 'milk', name: '芋泥波波鮮奶', detail: '綿密芋泥 · 鮮乳香醇', emoji: '🥛', votes: '854', tag: '療癒系' },
+  { category: 'fruit', name: '百香雙響炮', detail: '百香果香 · 雙料口感', emoji: '🍊', votes: '726', tag: '酸甜果茶' },
+  { category: 'other', name: '桂圓紅棗茶', detail: '桂圓棗香 · 暖心熱飲', emoji: '☕', votes: '613', tag: '暖心推薦' },
 ];
-function renderRanking(list = drinks) {
+let rankingOrder = [...drinks];
+function renderRanking(list = rankingOrder) {
   document.querySelector('#rankingGrid').innerHTML = list.map((drink, index) => `<article class="rank-item"><span class="rank-number">${String(index + 1).padStart(2, '0')}</span><span class="rank-emoji" aria-hidden="true">${drink.emoji}</span><div class="rank-copy"><strong>${t(drink.name)}</strong><small>${t(drink.detail)}</small></div><span class="rank-tag">${t(drink.tag)}</span><span class="rank-votes">♡ ${drink.votes}</span></article>`).join('');
 }
 function filterRanking() {
   const query = document.querySelector('#rankingSearch').value.trim().toLocaleLowerCase();
   const sort = document.querySelector('#rankingSort').value;
-  const list = drinks.filter(drink => `${t(drink.name)} ${t(drink.detail)} ${t(drink.tag)}`.toLocaleLowerCase().includes(query));
+  const category = document.querySelector('#rankingCategory').value;
+  const list = rankingOrder.filter(drink => (category === 'all' || drink.category === category) && `${t(drink.name)} ${t(drink.detail)} ${t(drink.tag)}`.toLocaleLowerCase().includes(query));
   if (sort === 'name') list.sort((a, b) => t(a.name).localeCompare(t(b.name), currentLocale));
   renderRanking(list);
 }
 document.querySelector('#rankingSearch').addEventListener('input', filterRanking);
 document.querySelector('#rankingSort').addEventListener('change', filterRanking);
+document.querySelector('#rankingCategory').addEventListener('change', filterRanking);
 renderRanking();
 document.querySelector('#refreshRanking').addEventListener('click', event => {
   const button = event.currentTarget;
@@ -260,7 +276,8 @@ document.querySelector('#refreshRanking').addEventListener('click', event => {
     document.querySelector('#loadingModal').close();
     button.disabled = false;
     button.textContent = t('↻ 更新排行');
-    renderRanking([...drinks.slice(1, 3), drinks[0], ...drinks.slice(3)]);
+    rankingOrder = [...rankingOrder.slice(1, 3), rankingOrder[0], ...rankingOrder.slice(3)];
+    filterRanking();
     showToast(t('已更新展示排行'));
   }, 850);
 });
@@ -277,13 +294,18 @@ function renderNews() {
 renderNews();
 
 const places = [
-  { name: '青禾茶室', type: '手沖茶飲 · 烏龍專門', distance: '350 m', emoji: '🍵' },
-  { name: '山日子茶飲', type: '鮮奶茶 · 自家烘焙', distance: '650 m', emoji: '🧋' },
-  { name: '小島製茶', type: '台灣茶 · 季節限定', distance: '900 m', emoji: '🫖' },
+  { name: '青禾茶室', type: '手沖茶飲 · 烏龍專門', category: '茶飲', distance: '350 m', open: true, emoji: '🍵' },
+  { name: '山日子茶飲', type: '鮮奶茶 · 自家烘焙', category: '奶茶', distance: '650 m', open: true, emoji: '🧋' },
+  { name: '小島製茶', type: '台灣茶 · 季節限定', category: '茶飲', distance: '900 m', open: false, emoji: '🫖' },
 ];
 function renderPlaces() {
-  document.querySelector('#placeList').innerHTML = places.map(place => `<div class="place-row"><span class="place-thumb" aria-hidden="true">${place.emoji}</span><span class="place-copy"><strong>${t(place.name)}</strong><small>${t(place.type)}</small></span><span class="place-distance">${place.distance}</span></div>`).join('');
+  const category = document.querySelector('#placeCategory')?.value || 'all';
+  const maxDistance = document.querySelector('#placeDistance')?.value || 'all';
+  const openOnly = document.querySelector('#filterOpen')?.checked || false;
+  const filtered = places.filter(place => (category === 'all' || place.category === category) && (maxDistance === 'all' || Number.parseInt(place.distance, 10) <= Number(maxDistance)) && (!openOnly || place.open));
+  document.querySelector('#placeList').innerHTML = filtered.map(place => `<div class="place-row"><span class="place-thumb" aria-hidden="true">${place.emoji}</span><span class="place-copy"><strong>${t(place.name)}</strong><small>${t(place.type)} · ${t(place.open ? '營業中' : '目前休息')}</small></span><span class="place-distance">${place.distance}</span></div>`).join('') || `<p class="muted">${t('沒有符合條件的示範店家')}</p>`;
 }
+document.querySelectorAll('#filterOpen, #placeCategory, #placeDistance').forEach(control => control.addEventListener('change', renderPlaces));
 renderPlaces();
 const weatherLabels = {
   0: '晴朗', 1: '大致晴朗', 2: '局部多雲', 3: '陰天', 45: '有霧', 48: '有霧',
@@ -362,6 +384,7 @@ function locate({ automatic = false } = {}) {
 document.querySelector('#locateButton').addEventListener('click', locate);
 document.querySelector('#locateFromList').addEventListener('click', locate);
 
+const graphDrinkMatches = { '烏龍茶': ['桂花烏龍鮮奶茶', '四季春青茶'], '清香': ['四季春青茶', '柚香翡翠'], '焙火': ['黑糖珍珠鮮奶', '蜜香紅茶'], '茶韻': ['桂花烏龍鮮奶茶', '蜜香紅茶'], '桂花': ['桂花烏龍鮮奶茶'], '奶香': ['桂花烏龍鮮奶茶', '芋泥波波鮮奶'], '柑橘': ['冬瓜檸檬', '柚香翡翠'], '花香': ['桂花烏龍鮮奶茶'], '焦糖': ['黑糖珍珠鮮奶'], '木質': ['蜜香紅茶'], '蜂蜜': ['蜜香紅茶'], '鮮奶': ['桂花烏龍鮮奶茶', '芋泥波波鮮奶'], '珍珠': ['黑糖珍珠鮮奶', '百香雙響炮'], '回甘': ['四季春青茶'] };
 const graphConnections = { '烏龍茶': ['清香', '焙火', '茶韻', '桂花', '奶香'], '清香': ['烏龍茶', '柑橘', '花香'], '焙火': ['烏龍茶', '焦糖', '木質'], '茶韻': ['烏龍茶', '回甘'], '桂花': ['烏龍茶', '香氣', '蜂蜜'], '奶香': ['烏龍茶', '鮮奶', '珍珠'], '柑橘': ['清香'], '花香': ['清香'], '焦糖': ['焙火'], '木質': ['焙火'], '香氣': ['桂花'], '蜂蜜': ['桂花'], '鮮奶': ['奶香'], '珍珠': ['奶香'], '回甘': ['茶韻'] };
 document.querySelectorAll('.graph-node').forEach(node => node.addEventListener('click', () => {
   const name = t(node.dataset.name);
@@ -371,6 +394,8 @@ document.querySelectorAll('.graph-node').forEach(node => node.addEventListener('
   document.querySelectorAll('.graph-node').forEach(other => { other.classList.toggle('selected', other === node); other.setAttribute('aria-pressed', String(other === node)); });
   const related = linkedNames.map(t).join('、');
   document.querySelector('#graphDetail').textContent = `${name}: ${t('相關風味')} ${related}。${t('關聯為示範資料')}`;
+  const matching = graphDrinkMatches[node.dataset.name] || []; const mount = document.querySelector('#graphDrinks'); mount.replaceChildren();
+  if (matching.length) { const title = document.createElement('strong'); title.textContent = t('相關示範飲品'); mount.append(title); matching.forEach(drink => { const button = document.createElement('button'); button.type = 'button'; button.textContent = t(drink); button.addEventListener('click', () => { navigate('home'); sendMessage(`${t(drink)} ${t('風味推薦')}`); }); mount.append(button); }); }
 }));
 document.querySelectorAll('.graph-node').forEach(node => node.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); node.dispatchEvent(new MouseEvent('click', { bubbles: true })); } }));
 
@@ -393,23 +418,48 @@ function saveChat() {
   try { const messages = [...document.querySelectorAll('#chatMessages .message')]; const firstBubble = messages[0]?.querySelector('.bubble')?.textContent || ''; const isWelcome = messages[0]?.classList.contains('assistant-message') && firstBubble.startsWith('嗨！今天想喝點什麼呢？'); const saved = messages.slice(isWelcome ? 1 : 0).map(message => ({ role: message.classList.contains('user-message') ? 'user' : 'assistant', text: message.querySelector('.bubble')?.childNodes[0]?.textContent || message.querySelector('.bubble')?.textContent || '' })); localStorage.setItem('teaSenseChat', JSON.stringify(saved)); } catch {}
 }
 const demoRecommendations = [
-  { name: '桂花烏龍鮮奶茶', flavor: '花香、茶韻、奶香', sweetness: '微糖少冰', calories: '約 250–350 大卡', caffeine: '含咖啡因', allergens: '可能含乳製品；依店家配方為準' },
-  { name: '四季春青茶', flavor: '清香、清爽、回甘', sweetness: '無糖少冰', calories: '約 0–80 大卡', caffeine: '含咖啡因', allergens: '通常不含乳；仍需確認店家資訊' },
-  { name: '桂圓紅棗茶', flavor: '溫潤、果甜、暖香', sweetness: '建議無額外加糖', calories: '依配方而異', caffeine: '通常不含咖啡因', allergens: '依店家配方確認' },
+  { name: '桂花烏龍鮮奶茶', flavor: '花香、茶韻、奶香', sweetness: '微糖少冰', calories: '約 250–350 大卡', caffeine: '含咖啡因', caffeineLevel: 'high', allergens: ['乳製品'], tea: '烏龍茶', category: 'milk' },
+  { name: '四季春青茶', flavor: '清香、清爽、回甘', sweetness: '無糖少冰', calories: '約 0–80 大卡', caffeine: '含咖啡因', caffeineLevel: 'medium', allergens: [], tea: '綠茶', category: 'tea' },
+  { name: '桂圓紅棗茶', flavor: '溫潤、果甜、暖香', sweetness: '建議無額外加糖', calories: '依配方而異', caffeine: '通常不含咖啡因', caffeineLevel: 'none', allergens: [], tea: '花草茶', category: 'other' },
 ];
 let recommendationIndex = 0;
 const comparedDrinks = [];
+function matchingRecommendations() {
+  const prefs = getPreferences();
+  const allergenPrefs = prefs.filter(value => ['乳製品', '堅果', '蜂蜜', '大豆'].includes(value));
+  const maxCalories = prefs.includes('低於 150 大卡') ? 150 : prefs.includes('低於 300 大卡') ? 300 : Infinity;
+  const wantsNoCaffeine = prefs.includes('無咖啡因');
+  const candidates = demoRecommendations.filter(item => (!allergenPrefs.some(allergen => item.allergens.includes(allergen))) && (!wantsNoCaffeine || item.caffeineLevel === 'none') && (!prefs.includes('低咖啡因') || ['low', 'none'].includes(item.caffeineLevel)) && (item.calories.startsWith('約 ') ? Number([...item.calories.matchAll(/\d+/g)].at(-1)?.[0] || 0) <= maxCalories : maxCalories === Infinity) && (!prefs.some(value => ['烏龍茶','紅茶','綠茶','花草茶'].includes(value)) || prefs.includes(item.tea)));
+  return candidates.length ? { items: candidates, hasMatch: true } : { items: demoRecommendations, hasMatch: false };
+}
+function renderComparison() {
+  const mount = document.querySelector('#recommendationCompare'); mount.replaceChildren();
+  if (!comparedDrinks.length) return;
+  const heading = document.createElement('strong'); heading.textContent = t('飲品比較'); mount.append(heading);
+  const table = document.createElement('div'); table.className = 'comparison-grid';
+  const labels = ['品項', '風味', '建議甜度', '熱量', '咖啡因', '過敏原提醒'];
+  const headingCell = document.createElement('div'); headingCell.className = 'comparison-row comparison-heading';
+  labels.forEach(label => { const cell = document.createElement('span'); cell.textContent = t(label); headingCell.append(cell); }); table.append(headingCell);
+  comparedDrinks.forEach((item, index) => {
+    const row = document.createElement('div'); row.className = 'comparison-row';
+    [item.name, item.flavor, item.sweetness, item.calories, item.caffeine, item.allergens.length ? item.allergens.join('、') : '未標示'].forEach(value => { const cell = document.createElement('span'); cell.textContent = t(value); row.append(cell); });
+    const remove = document.createElement('button'); remove.type = 'button'; remove.textContent = t('移除'); remove.addEventListener('click', () => { comparedDrinks.splice(index, 1); renderComparison(); }); row.append(remove); table.append(row);
+  }); mount.append(table);
+}
+
 function renderRecommendationCard(container) {
-  const item = demoRecommendations[recommendationIndex % demoRecommendations.length];
+  const filtered = matchingRecommendations();
+  const item = filtered.items[recommendationIndex % filtered.items.length];
   container.querySelector('.recommendation-card')?.remove();
   const card = document.createElement('section'); card.className = 'recommendation-card'; card.setAttribute('aria-label', t('示範推薦卡'));
   const title = document.createElement('strong'); title.textContent = t(item.name);
   const flavor = document.createElement('p'); flavor.textContent = `${t('風味')}：${t(item.flavor)}`;
   const specs = document.createElement('p'); specs.textContent = `${t('建議甜度')}：${t(item.sweetness)}　·　${t('熱量')}：${t(item.calories)}　·　${t('咖啡因')}：${t(item.caffeine)}`;
-  const allergen = document.createElement('small'); allergen.textContent = `${t('過敏原提醒')}：${t(item.allergens)}。${t('請向店家確認實際成分與過敏原資訊。')}`;
+  const allergen = document.createElement('small'); allergen.textContent = `${t('過敏原提醒')}：${item.allergens.length ? item.allergens.map(t).join('、') : t('示範資料未標示常見過敏原')}。${t('請向店家確認實際成分與過敏原資訊。')}`;
+  if (!filtered.hasMatch) { const note = document.createElement('small'); note.className = 'recommendation-note'; note.textContent = t('目前示範清單中沒有完全符合條件的品項，以下列出一般示範選項供參考。'); card.append(note); }
   const actions = document.createElement('div'); actions.className = 'recommendation-actions';
-  const swap = document.createElement('button'); swap.type = 'button'; swap.textContent = t('換一杯'); swap.addEventListener('click', () => { recommendationIndex++; renderRecommendationCard(container); });
-  const compare = document.createElement('button'); compare.type = 'button'; compare.textContent = t('加入比較'); compare.addEventListener('click', () => { if (!comparedDrinks.includes(item.name)) comparedDrinks.push(item.name); compare.textContent = t('已加入比較'); document.querySelector('#recommendationCompare').textContent = `${t('比較清單')}：${comparedDrinks.map(t).join('、')}`; });
+  const swap = document.createElement('button'); swap.type = 'button'; swap.textContent = t('換一杯'); swap.addEventListener('click', () => { recommendationIndex = (recommendationIndex + 1) % matchingRecommendations().items.length; renderRecommendationCard(container); });
+  const compare = document.createElement('button'); compare.type = 'button'; compare.textContent = t('加入比較'); compare.addEventListener('click', () => { if (!comparedDrinks.some(entry => entry.name === item.name)) comparedDrinks.push(item); compare.textContent = t('已加入比較'); renderComparison(); });
   actions.append(swap, compare); card.append(title, flavor, specs, allergen, actions); container.append(card);
 }
 
@@ -428,17 +478,19 @@ function addMessage(text, role) {
     const avatar = document.createElement('span'); avatar.className = 'message-avatar'; avatar.textContent = '茶';
     wrapper.append(avatar);
   }
-  body.append(meta, bubble); wrapper.append(body);
+  body.append(meta, bubble);
+  const remove = document.createElement('button'); remove.type = 'button'; remove.className = 'message-delete'; remove.textContent = t('刪除'); remove.setAttribute('aria-label', `${t('刪除')} ${text.slice(0, 30)}`);
+  body.append(remove); wrapper.append(body);
   document.querySelector('#chatMessages').append(wrapper);
   saveChat();
   wrapper.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
 }
-async function sendMessage(text) {
+async function sendMessage(text, { appendUser = true } = {}) {
   const cleaned = text.trim();
   if (!cleaned) return;
   document.body.classList.add('conversation-active');
   document.querySelector('.chat-card').classList.add('conversation-active');
-  addMessage(cleaned, 'user');
+  if (appendUser) addMessage(cleaned, 'user');
   document.querySelector('#chatInput').value = '';
   const modal = document.querySelector('#loadingModal');
   modal.showModal();
@@ -453,9 +505,17 @@ async function sendMessage(text) {
   } catch (error) {
     modal.close();
     addMessage(t('目前暫時無法連線到推薦服務，請稍後再試。你仍可使用偏好選擇與其他展示頁面。'), 'assistant');
+    const retry = document.createElement('button'); retry.type = 'button'; retry.className = 'retry-button'; retry.textContent = t('重試'); retry.addEventListener('click', () => { const lastUser = [...document.querySelectorAll('#chatMessages .user-message')].at(-1)?.querySelector('.bubble')?.textContent; document.querySelector('#chatMessages .assistant-message:last-child')?.remove(); if (lastUser) sendMessage(lastUser, { appendUser: false }); }); document.querySelector('#chatMessages .assistant-message:last-child .message-body')?.append(retry);
     console.error('Recommendation service error:', error);
   }
 }
+document.querySelector('#chatMessages').addEventListener('click', event => {
+  if (event.target.closest('.message-delete')) { event.target.closest('.message').remove(); saveChat(); }
+});
+document.querySelector('#regenerateChat').addEventListener('click', () => {
+  const messages = [...document.querySelectorAll('#chatMessages .user-message')]; const latest = messages.at(-1)?.querySelector('.bubble')?.textContent;
+  if (latest) { document.querySelector('#chatMessages .assistant-message:last-child')?.remove(); sendMessage(latest, { appendUser: false }); }
+});
 document.querySelector('#clearChat').addEventListener('click', () => {
   document.querySelector('#chatMessages').innerHTML = '';
   const welcome = document.createElement('div'); welcome.className = 'message assistant-message';
@@ -474,13 +534,12 @@ document.querySelector('#clearChat').addEventListener('click', () => {
 });
 document.querySelector('#chatForm').addEventListener('submit', event => { event.preventDefault(); sendMessage(document.querySelector('#chatInput').value); });
 document.querySelectorAll('[data-prompt]').forEach(button => button.addEventListener('click', () => sendMessage(button.dataset.prompt)));
-document.querySelectorAll('.preference-options input').forEach(input => input.addEventListener('change', () => {
-  syncPreferenceLabels();
-}));
+document.querySelectorAll('.preference-options input').forEach(input => input.addEventListener('change', () => { syncPreferenceLabels(); }));
 document.querySelector('#applyPreferences').addEventListener('click', () => {
   const preferences = getPreferences();
   try { localStorage.setItem('teaSenseDrinkPreferences', JSON.stringify(preferences)); } catch {}
   showToast(preferences.length ? t('已套用 {count} 項偏好', { count: preferences.length }) : t('已清除偏好條件'));
+  document.querySelectorAll('#chatMessages .assistant-message').forEach(message => { if (message.querySelector('.recommendation-card')) renderRecommendationCard(message.querySelector('.bubble')); });
   closeDrinkPreferences();
 });
 
@@ -506,7 +565,6 @@ function openPreferences() {
   document.querySelector('#themeSelect').value = document.body.classList.contains('dark') ? 'dark' : 'light';
   preferencesModal.showModal();
 }
-document.querySelector('#preferencesButton').addEventListener('click', openPreferences);
 document.querySelector('#profileButton').addEventListener('click', openPreferences);
 const drinkPreferencesModal = document.querySelector('#drinkPreferencesModal');
 const drinkPreferencesButton = document.querySelector('#openDrinkPreferences');

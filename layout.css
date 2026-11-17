@@ -13,12 +13,11 @@ body.dark[data-current-page="home"] #page-home,body:not(.dark)[data-current-page
 body.dark .sidebar,body:not(.dark) .sidebar{width:var(--sidebar-width);align-items:stretch;padding:14px 10px 16px;overflow:hidden;transition:width .2s ease,transform .25s ease}
 body.dark .brand,body:not(.dark) .brand{width:44px;height:44px;padding:0;margin:0 auto 20px;justify-content:center;flex:none}
 body.dark .brand-mark{width:38px;height:38px;clip-path:none;border-radius:11px;background:var(--green-dark);color:#fff;font-size:calc(18px * var(--font-scale,1))}
-body.dark .brand-copy,body:not(.dark) .brand-copy,body.dark .side-label,body:not(.dark) .side-label,body.dark .mini-note,body:not(.dark) .mini-note,body.dark .setting-label,body:not(.dark) .setting-label{display:none}
+body.dark .brand-copy,body:not(.dark) .brand-copy,body.dark .side-label,body:not(.dark) .side-label,body.dark .mini-note,body:not(.dark) .mini-note{display:none}
 body.sidebar-expanded .brand{width:auto;justify-content:flex-start;padding:0 8px}
 body.sidebar-expanded .brand-copy{display:grid}
 body.sidebar-expanded .side-label{display:block;padding:0 10px 12px}
 body.sidebar-expanded .mini-note{display:flex}
-body.sidebar-expanded .setting-label{display:inline}
 body.dark .sidebar-toggle,body:not(.dark) .sidebar-toggle{display:grid;place-items:center;align-self:center;width:38px;height:38px;padding:0;margin:0 0 12px;border:1px solid var(--line);border-radius:12px;background:var(--white);color:var(--ink);font-size:25px;line-height:1}
 body.sidebar-expanded .sidebar-toggle{align-self:flex-end;transform:rotate(180deg)}
 body.dark .sidebar-toggle{background:#202126;border-color:#34353d;color:#e7e8ed}
@@ -29,9 +28,6 @@ body.sidebar-expanded .nav-link{width:100%;justify-content:flex-start;margin:0;p
 .nav-icon svg{display:block;width:20px;height:20px;overflow:visible;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 body.dark .nav-icon{width:22px;height:22px;flex-basis:22px;font-size:0}
 body.dark .sidebar-bottom,body:not(.dark) .sidebar-bottom{width:100%;display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:auto}
-body.dark .sidebar #preferencesButton,body:not(.dark) .sidebar #preferencesButton{position:static;left:auto;bottom:auto;z-index:auto;display:flex;align-items:center;justify-content:center;gap:11px;width:46px;height:46px;flex:none;padding:0;border-radius:13px}
-body.dark.sidebar-expanded .sidebar #preferencesButton,body:not(.dark).sidebar-expanded .sidebar #preferencesButton{width:100%;justify-content:flex-start;padding:0 12px}
-body.dark .sidebar #preferencesButton svg,body:not(.dark) .sidebar #preferencesButton svg{display:block;width:21px;height:21px;flex:none;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
 body.sidebar-expanded .profile-button{width:100%;justify-content:flex-start;padding:8px}
 body.sidebar-expanded .profile-button>span:not(.avatar){display:block}
 body:not(.sidebar-expanded) .profile-button{width:46px;height:46px;justify-content:center;margin:0 auto;padding:0}
@@ -105,10 +101,8 @@ body.dark .preference-card[open] .preference-options{color:#e1e9e2}
   body.dark .sidebar.open .brand-copy,body:not(.dark) .sidebar.open .brand-copy{display:grid}
   body.dark .sidebar.open .side-label,body:not(.dark) .sidebar.open .side-label{display:block;padding:0 10px 12px}
   body.dark .sidebar.open .mini-note,body:not(.dark) .sidebar.open .mini-note{display:flex}
-  body.dark .sidebar.open .setting-label,body:not(.dark) .sidebar.open .setting-label{display:inline}
   body.dark .sidebar.open .brand,body:not(.dark) .sidebar.open .brand{width:auto;margin:0 0 20px;padding:0 8px;justify-content:flex-start}
   body.dark .sidebar.open .nav-link,body:not(.dark) .sidebar.open .nav-link{width:100%;height:46px;justify-content:flex-start;margin:0;padding:0 12px;font-size:calc(13px * var(--font-scale,1))}
-  body.dark .sidebar.open #preferencesButton,body:not(.dark) .sidebar.open #preferencesButton{width:100%;justify-content:flex-start;padding:0 12px}
   body.dark .sidebar.open .profile-button,body:not(.dark) .sidebar.open .profile-button{width:100%;justify-content:flex-start;padding:8px}
   body.dark .sidebar.open .profile-button>span:not(.avatar),body:not(.dark) .sidebar.open .profile-button>span:not(.avatar){display:block}
   body.dark .sidebar.open .app-version,body:not(.dark) .sidebar.open .app-version{display:block}
@@ -127,3 +121,18 @@ body.dark .preference-card[open] .preference-options{color:#e1e9e2}
   body.dark.conversation-active[data-current-page="home"] .bubble,body:not(.dark).conversation-active[data-current-page="home"] .bubble{font-size:calc(15px * var(--font-scale,1))}
   body.dark.conversation-active[data-current-page="home"] .suggestion-card strong,body:not(.dark).conversation-active[data-current-page="home"] .suggestion-card strong{font-size:calc(20px * var(--font-scale,1))}
 }
+
+/* Keep chat actions available even while the welcome state hides its header. */
+body[data-current-page="home"] .chat-card .chat-tools{position:absolute;z-index:24;top:0;right:0;display:flex;align-items:center;gap:10px}
+body[data-current-page="home"] #clearChat{display:inline-flex;align-items:center;min-height:32px;padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--white);color:var(--green-dark);font-size:calc(11px * var(--font-scale,1));white-space:nowrap;box-shadow:0 3px 12px #243a2b12}
+body[data-current-page="home"] #clearChat:hover{background:var(--green-soft);border-color:#9db4a1}
+body[data-current-page="home"] #regenerateChat{display:none}
+body.conversation-active[data-current-page="home"] #regenerateChat{display:inline-flex}
+@media(max-width:760px){body[data-current-page="home"] .chat-card .chat-tools{top:0;right:0;gap:4px}body[data-current-page="home"] #clearChat{min-height:30px;padding:5px 8px;font-size:calc(10px * var(--font-scale,1))}}
+
+/* Keep chat actions below the fixed weather pill while a conversation is open. */
+body.conversation-active[data-current-page="home"] .chat-card .chat-tools{top:72px;right:0}
+body.conversation-active[data-current-page="home"] .chat-messages{inset:122px 0 0}
+@media(max-width:760px){body.conversation-active[data-current-page="home"] .chat-card .chat-tools{top:60px;right:0}body.conversation-active[data-current-page="home"] .chat-messages{inset:112px 0 0}}
+body.dark.conversation-active[data-current-page="home"] .chat-messages,body:not(.dark).conversation-active[data-current-page="home"] .chat-messages{inset:122px 0 0}
+@media(max-width:760px){body.dark.conversation-active[data-current-page="home"] .chat-messages,body:not(.dark).conversation-active[data-current-page="home"] .chat-messages{inset:112px 0 0}}
