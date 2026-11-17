@@ -113,7 +113,6 @@ body.dark .preference-card[open] .preference-options{color:#e1e9e2}
   body.dark.conversation-active[data-current-page="home"] .composer-footer,body:not(.dark).conversation-active[data-current-page="home"] .composer-footer{left:14px;right:14px;bottom:9px;font-size:calc(9px * var(--font-scale,1))}
   body.dark[data-current-page="home"] .preference-card[open],body:not(.dark)[data-current-page="home"] .preference-card[open]{left:12px;bottom:112px;width:calc(100vw - 24px);max-height:72svh;padding:18px}
   body[data-current-page="home"] .weather-pill{top:70px;right:14px;max-width:calc(100vw - 28px);padding:7px 10px}
-  body.dark[data-current-page="home"] .weather-credit{display:inline;color:#9da6c2;font-size:9px}
   body.dark.conversation-active[data-current-page="home"] .preference-card[open],body:not(.dark).conversation-active[data-current-page="home"] .preference-card[open]{left:12px;bottom:116px}
   body.dark.conversation-active[data-current-page="home"] .chat-messages,body:not(.dark).conversation-active[data-current-page="home"] .chat-messages{inset:54px 0 0;padding:4px 0 16px}
   body.dark.conversation-active[data-current-page="home"] .message-body,body:not(.dark).conversation-active[data-current-page="home"] .message-body{max-width:96%}
