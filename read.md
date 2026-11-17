@@ -105,3 +105,7 @@ python3 -m http.server 8000
 - `data.js` 提供 catalog 欄位驗證；以 `node --test tests/data-model.test.cjs` 執行資料結構、ID 唯一性和風味圖引用回歸檢查。
 - 飲品資料和翻譯已拆至 `data.js`、`i18n.js`；互動仍集中在 `app.js`。大型產品化時可再按頁面／服務拆分互動層。
 - API 契約草案見 `api-contracts.md`；視覺 token、插畫和動態規範見 `design-system.md`。正式 API、真實店家資訊、跨裝置同步和完整瀏覽器 UI 自動化尚未接通。
+
+## 新版 UI 本機預覽（2026-11-17）
+
+本次新增 `refresh.css` 與 `assets/daily-cup.svg`，更新茶室配色、插畫首頁、聊天輸入與手機介面。執行 `python3 -m http.server 8017` 後開啟 http://localhost:8017 。現有資料測試可用 `node --test tests/data-model.test.cjs` 執行。此版本尚未部署至正式網站。
