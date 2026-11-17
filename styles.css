@@ -179,3 +179,19 @@ body.dark .recommendation-card{background:#252e28;border-color:#465249;border-le
 @media(max-width:560px){.recommendation-card{grid-template-columns:1fr}.drink-art{min-height:100px}.drink-art::before{bottom:10px}.drink-art::after{top:8px}.settings-data-tools>*{flex:1;text-align:center}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 .recommendation-actions button.is-added{animation:compare-pop .24s ease}@keyframes compare-pop{50%{transform:scale(1.06)}}
+.chat-card{isolation:isolate}
+.ingredient-animation-layer{position:absolute;z-index:-1;inset:0;overflow:hidden;pointer-events:none;border-radius:inherit}
+.ingredient-particle{position:absolute;display:grid;place-items:center;width:clamp(18px,2.2vw,34px);height:clamp(18px,2.2vw,34px);opacity:.2;filter:blur(.2px);user-select:none;will-change:transform,opacity}
+.ingredient-pearl{color:#bd9464;text-shadow:0 2px 5px #815d3f66;font-size:clamp(22px,2.5vw,38px)}
+.ingredient-coconut{color:#e4d9bd;text-shadow:0 2px 5px #927f6266;font-size:clamp(25px,2.9vw,42px)}
+.ingredient-jelly{color:#69836c;text-shadow:0 2px 5px #42634966;font-size:clamp(20px,2.4vw,36px)}
+.ingredient-particle.is-entering{animation:ingredient-flow-in 1.15s cubic-bezier(.2,.75,.3,1) var(--particle-delay,0ms) both}
+.ingredient-particle.is-present{opacity:.22;transform:translateY(0)}
+.ingredient-particle.is-draining{animation:ingredient-flow-out .8s cubic-bezier(.45,0,.85,.35) both}
+@keyframes ingredient-flow-in{0%{opacity:0;transform:translateY(-28vh) rotate(-45deg) scale(.4)}70%{opacity:.34;transform:translateY(5px) rotate(8deg) scale(1.08)}100%{opacity:.22;transform:translateY(0) rotate(0) scale(1)}}
+@keyframes ingredient-flow-out{0%{opacity:.24;transform:translateY(0) rotate(0) scale(1)}100%{opacity:0;transform:translateY(55vh) rotate(95deg) scale(.7)}}
+.motion-setting{display:flex;align-items:flex-start;gap:10px;margin:14px 0;padding:11px 12px;border:1px solid var(--line);border-radius:9px;color:var(--ink);cursor:pointer}
+.motion-setting input{width:17px;height:17px;margin:2px 0 0;accent-color:var(--green)}
+.motion-setting span{display:grid;gap:3px}.motion-setting strong{font-size:calc(12px * var(--font-scale,1))}.motion-setting small{color:var(--muted);font-size:calc(10px * var(--font-scale,1))}
+body.dark .motion-setting{border-color:#465249;color:#f0f4f0}body.dark .motion-setting small{color:#c7d2c8}
+@media(prefers-reduced-motion:reduce){.ingredient-particle.is-entering,.ingredient-particle.is-draining{animation:none!important}.ingredient-particle.is-entering{opacity:.22;transform:none}.ingredient-particle.is-draining{opacity:0}}

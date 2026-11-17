@@ -139,5 +139,12 @@ const catalogLabels = {
 };
 for (const [source, values] of Object.entries(catalogLabels)) { translations.en[source] = values[0]; translations.ja[source] = values[1]; translations.ko[source] = values[2]; }
 
+translations.en['停用配料背景動畫'] = 'Disable topping background animations';
+translations.ja['停用配料背景動畫'] = 'トッピング背景アニメーションを無効にする';
+translations.ko['停用配料背景動畫'] = '토핑 배경 애니메이션 끄기';
+translations.en['關閉勾選配料時的背景動態效果'] = 'Hide background motion when selecting toppings';
+translations.ja['關閉勾選配料時的背景動態效果'] = 'トッピング選択時の背景アニメーションを非表示にします';
+translations.ko['關閉勾選配料時的背景動態效果'] = '토핑을 선택할 때 배경 애니메이션을 숨깁니다';
+
 window.TEA_SENSE_I18N = { localeNames, fontSizeScales, translations };
 })();

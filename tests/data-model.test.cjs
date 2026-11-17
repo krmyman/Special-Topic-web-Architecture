@@ -76,6 +76,24 @@ test('reduced-motion support and generation cancellation control exist', () => {
   assert.match(html, /id="stopGeneration"/);
 });
 
+test('topping backdrop animation can be disabled and respects reduced motion', () => {
+  const app = fs.readFileSync(path.join(__dirname, '..', 'app.js'), 'utf8');
+  const css = fs.readFileSync(path.join(__dirname, '..', 'styles.css'), 'utf8');
+  assert.match(html, /id="ingredientAnimationLayer"/);
+  assert.match(html, /id="disableDecorativeAnimations"/);
+  assert.match(app, /syncIngredientBackdrop/);
+  assert.match(css, /ingredient-flow-in/);
+  assert.match(css, /ingredient-flow-out/);
+  assert.match(css, /prefers-reduced-motion:reduce\).*ingredient-particle/);
+});
+
+test('selected preference radio options can be toggled off', () => {
+  const app = fs.readFileSync(path.join(__dirname, '..', 'app.js'), 'utf8');
+  assert.match(app, /radioSelections\.get\(input\.name\) !== input\.value/);
+  assert.match(app, /input\.checked = false;\s*input\.dispatchEvent\(new Event\('change'/);
+  assert.match(app, /rememberRadioSelections\(\);/);
+});
+
 test('catalog display strings have translations in all supported locales', () => {
   const dictionaries = sandbox.window.TEA_SENSE_I18N.translations;
   const sources = new Set(data.drinks.flatMap(drink => [drink.name, drink.detail, drink.tag, drink.caffeineLabel, drink.sweetness, drink.nutrition.label, drink.reason, drink.adjustment, ...drink.flavors, ...drink.allergens]));

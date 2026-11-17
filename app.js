@@ -303,6 +303,53 @@ function getPreferences() {
   const selected = [...document.querySelectorAll('.preference-options input:checked')].map(input => input.value);
   return selected.length ? selected : [];
 }
+const radioSelections = new Map();
+function rememberRadioSelections() {
+  radioSelections.clear();
+  document.querySelectorAll('.preference-options input[type="radio"]').forEach(input => {
+    if (input.checked) radioSelections.set(input.name, input.value);
+  });
+}
+rememberRadioSelections();
+const ingredientAnimationLayer = document.querySelector('#ingredientAnimationLayer');
+const ingredientVisuals = { '珍珠': ['●', 'pearl'], '椰果': ['◇', 'coconut'], '仙草': ['▰', 'jelly'] };
+let ingredientAnimationsEnabled = true;
+try { ingredientAnimationsEnabled = localStorage.getItem('teaSenseDisableDecorativeAnimations') !== 'true'; } catch {}
+function syncIngredientBackdrop({ animate = true } = {}) {
+  const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  const selected = ingredientAnimationsEnabled && !document.querySelector('.preference-options input[value="不加配料"]:checked')
+    ? [...document.querySelectorAll('.preference-options input[type="checkbox"]:checked')].map(input => input.value).filter(value => ingredientVisuals[value])
+    : [];
+  const shouldAnimate = animate && ingredientAnimationsEnabled && !reduceMotion;
+  [...ingredientAnimationLayer.children].forEach(particle => {
+    if (!selected.includes(particle.dataset.topping)) {
+      if (!shouldAnimate) { particle.remove(); return; }
+      if (!particle.classList.contains('is-draining')) {
+        particle.classList.remove('is-entering', 'is-present');
+        particle.classList.add('is-draining');
+        particle.addEventListener('animationend', () => particle.remove(), { once: true });
+        setTimeout(() => particle.remove(), 1100);
+      }
+    } else if (particle.classList.contains('is-draining')) {
+      particle.classList.remove('is-draining');
+      particle.classList.add('is-present');
+    }
+  });
+  selected.forEach((topping, toppingIndex) => {
+    if ([...ingredientAnimationLayer.children].some(particle => particle.dataset.topping === topping)) return;
+    const [glyph, visual] = ingredientVisuals[topping];
+    for (let index = 0; index < 8; index++) {
+      const particle = document.createElement('span');
+      particle.className = `ingredient-particle ingredient-${visual} ${shouldAnimate ? 'is-entering' : 'is-present'}`;
+      particle.dataset.topping = topping;
+      particle.textContent = glyph;
+      particle.style.left = `${((index * 29 + toppingIndex * 17) % 92) + 4}%`;
+      particle.style.top = `${8 + ((index * 23 + toppingIndex * 13) % 78)}%`;
+      particle.style.setProperty('--particle-delay', `${index * 55}ms`);
+      ingredientAnimationLayer.append(particle);
+    }
+  });
+}
 const preferenceSummaryDefaults = new WeakMap([...document.querySelectorAll('.preference-item')].map(details => [
   details.querySelector('summary small'), details.querySelector('summary small').textContent,
 ]));
@@ -362,7 +409,7 @@ function renderRecommendationCard(container) {
   const content = document.createElement('div'); content.className = 'recommendation-copy';
   const allergen = document.createElement('small'); allergen.textContent = `${t('過敏原提醒')}：${item.allergens.length ? item.allergens.map(t).join('、') : t('示範資料未標示常見過敏原')}。${t('請向店家確認實際成分與過敏原資訊。')}`;
   const preferenceSummary = document.createElement('small'); preferenceSummary.className = 'preference-reason'; preferenceSummary.textContent = `${t('本次套用條件')}：${getPreferences().length ? getPreferences().map(t).join('、') : t('未套用額外偏好')}`;
-  if (!filtered.hasMatch) { const note = document.createElement('small'); note.className = 'recommendation-note'; note.textContent = t('目前示範清單中沒有完全符合條件的品項，以下列出一般示範選項供參考。過敏原條件不會自動放寬。'); card.append(note); const relax = document.createElement('button'); relax.type = 'button'; relax.className = 'relax-button'; relax.textContent = t('放寬熱量、茶種或配料條件'); relax.addEventListener('click', () => { document.querySelectorAll('input[name="calories"]').forEach(input => input.checked = false); document.querySelector('input[name="calories"][value="不限"]').checked = true; document.querySelectorAll('.preference-options input[type="checkbox"]').forEach(input => { if (!['乳製品','堅果','蜂蜜','大豆'].includes(input.value)) input.checked = false; }); syncPreferenceLabels(); renderRecommendationCard(container); }); card.append(relax); }
+  if (!filtered.hasMatch) { const note = document.createElement('small'); note.className = 'recommendation-note'; note.textContent = t('目前示範清單中沒有完全符合條件的品項，以下列出一般示範選項供參考。過敏原條件不會自動放寬。'); card.append(note); const relax = document.createElement('button'); relax.type = 'button'; relax.className = 'relax-button'; relax.textContent = t('放寬熱量、茶種或配料條件'); relax.addEventListener('click', () => { document.querySelectorAll('input[name="calories"]').forEach(input => input.checked = false); document.querySelector('input[name="calories"][value="不限"]').checked = true; document.querySelectorAll('.preference-options input[type="checkbox"]').forEach(input => { if (!['乳製品','堅果','蜂蜜','大豆'].includes(input.value)) input.checked = false; }); rememberRadioSelections(); syncPreferenceLabels(); renderRecommendationCard(container); }); card.append(relax); }
   const actions = document.createElement('div'); actions.className = 'recommendation-actions';
   const swap = document.createElement('button'); swap.type = 'button'; swap.textContent = t('換一杯'); swap.addEventListener('click', () => { recommendationIndex = (recommendationIndex + 1) % matchingRecommendations().items.length; renderRecommendationCard(container); });
   const compare = document.createElement('button'); compare.type = 'button'; compare.textContent = t('加入比較'); compare.addEventListener('click', () => { if (!comparedDrinks.some(entry => entry.id === item.id)) comparedDrinks.push(item); persistComparison(); compare.textContent = t('已加入比較'); compare.classList.add('is-added'); renderComparison(); });
@@ -470,7 +517,27 @@ document.querySelector('#clearChat').addEventListener('click', () => {
 });
 document.querySelector('#chatForm').addEventListener('submit', event => { event.preventDefault(); sendMessage(document.querySelector('#chatInput').value); });
 document.querySelectorAll('[data-prompt]').forEach(button => button.addEventListener('click', () => sendMessage(button.dataset.prompt)));
-document.querySelectorAll('.preference-options input').forEach(input => input.addEventListener('change', () => { syncPreferenceLabels(); }));
+document.querySelectorAll('.preference-options input').forEach(input => {
+  if (input.type === 'radio') {
+    input.addEventListener('click', () => {
+      if (radioSelections.get(input.name) !== input.value) return;
+      setTimeout(() => {
+        if (input.checked && radioSelections.get(input.name) === input.value) {
+          input.checked = false;
+          input.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+      }, 0);
+    });
+  }
+  input.addEventListener('change', () => {
+    if (input.type === 'radio') {
+      const selected = [...document.querySelectorAll('.preference-options input[type="radio"]')].find(candidate => candidate.name === input.name && candidate.checked);
+      radioSelections.set(input.name, selected?.value ?? null);
+    }
+    syncPreferenceLabels();
+    syncIngredientBackdrop();
+  });
+});
 document.querySelector('#applyPreferences').addEventListener('click', () => {
   const preferences = getPreferences();
   try { localStorage.setItem('teaSenseDrinkPreferences', JSON.stringify(preferences)); } catch {}
@@ -499,10 +566,11 @@ document.querySelector('#feedbackForm').addEventListener('submit', event => {
 const preferencesModal = document.querySelector('#preferencesModal');
 function openPreferences() {
   document.querySelector('#themeSelect').value = document.body.classList.contains('dark') ? 'dark' : 'light';
+  document.querySelector('#disableDecorativeAnimations').checked = !ingredientAnimationsEnabled;
   preferencesModal.showModal();
 }
 document.querySelector('#exportPreferences').addEventListener('click', () => {
-  downloadJson('tea-sense-preferences.json', { schemaVersion: 1, preferences: getPreferences(), language: currentLocale, theme: document.body.classList.contains('dark') ? 'dark' : 'light', fontSize: document.body.dataset.fontSize || 'medium' });
+  downloadJson('tea-sense-preferences.json', { schemaVersion: 1, preferences: getPreferences(), decorativeAnimations: ingredientAnimationsEnabled, language: currentLocale, theme: document.body.classList.contains('dark') ? 'dark' : 'light', fontSize: document.body.dataset.fontSize || 'medium' });
 });
 document.querySelector('#exportDrinkCatalog').addEventListener('click', () => downloadJson('tea-sense-sample-drinks.json', { schemaVersion: window.TEA_SENSE_DATA.schemaVersion, drinks }));
 document.querySelector('#importPreferencesFile').addEventListener('change', async event => {
@@ -511,7 +579,14 @@ document.querySelector('#importPreferencesFile').addEventListener('change', asyn
     const payload = JSON.parse(await file.text());
     if (payload.schemaVersion !== 1 || !Array.isArray(payload.preferences) || !payload.preferences.every(value => typeof value === 'string')) throw new Error('Invalid preferences file');
     document.querySelectorAll('.preference-options input').forEach(input => input.checked = payload.preferences.includes(input.value));
+    rememberRadioSelections();
     syncPreferenceLabels();
+    if (typeof payload.decorativeAnimations === 'boolean') {
+      ingredientAnimationsEnabled = payload.decorativeAnimations;
+      document.querySelector('#disableDecorativeAnimations').checked = !ingredientAnimationsEnabled;
+      localStorage.setItem('teaSenseDisableDecorativeAnimations', String(!ingredientAnimationsEnabled));
+      syncIngredientBackdrop();
+    }
     try { localStorage.setItem('teaSenseDrinkPreferences', JSON.stringify(getPreferences())); } catch {}
     showToast(t('偏好已匯入'));
   } catch { showToast(t('匯入檔案格式無效，請選擇茶感偏好 JSON。')); }
@@ -551,12 +626,15 @@ document.querySelector('#settingsForm').addEventListener('submit', event => {
   document.body.classList.toggle('dark', document.querySelector('#themeSelect').value === 'dark');
   const selectedLocale = document.querySelector('#languageSelect').value;
   const selectedFontSize = document.querySelector('#fontSizeSelect').value;
+  ingredientAnimationsEnabled = !document.querySelector('#disableDecorativeAnimations').checked;
+  syncIngredientBackdrop({ animate: ingredientAnimationsEnabled });
   applyLocale(selectedLocale);
   applyFontSize(selectedFontSize);
   try {
     localStorage.setItem('teaSenseLanguage', selectedLocale);
     localStorage.setItem('teaSenseFontSize', selectedFontSize);
     localStorage.setItem('teaSenseTheme', document.querySelector('#themeSelect').value);
+    localStorage.setItem('teaSenseDisableDecorativeAnimations', String(!ingredientAnimationsEnabled));
   } catch { /* Settings remain active for this session. */ }
   preferencesModal.close();
   showToast(t('設定已套用'));
@@ -579,6 +657,9 @@ try {
 applyLocale(savedLocale);
 renderComparison();
 try { const savedPrefs = JSON.parse(localStorage.getItem('teaSenseDrinkPreferences') || '[]'); document.querySelectorAll('.preference-options input').forEach(input => input.checked = savedPrefs.includes(input.value)); syncPreferenceLabels(); } catch {}
+rememberRadioSelections();
+document.querySelector('#disableDecorativeAnimations').checked = !ingredientAnimationsEnabled;
+syncIngredientBackdrop({ animate: false });
 try { const savedChat = JSON.parse(localStorage.getItem('teaSenseChat') || '[]'); if (savedChat.length) { const container = document.querySelector('#chatMessages'); container.innerHTML = ''; savedChat.forEach(item => { addMessage(String(item.text || ''), item.role === 'user' ? 'user' : 'assistant'); if (item.role !== 'user' && !AI_CONFIG.qwen.endpoint) renderRecommendationCard(document.querySelector('#chatMessages .assistant-message:last-child .bubble')); }); document.body.classList.add('conversation-active'); document.querySelector('.chat-card').classList.add('conversation-active'); } } catch {}
 let savedFontSize = 'medium';
 try {
