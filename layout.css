@@ -135,3 +135,16 @@ body.conversation-active[data-current-page="home"] .chat-messages{inset:122px 0 
 @media(max-width:760px){body.conversation-active[data-current-page="home"] .chat-card .chat-tools{top:60px;right:0}body.conversation-active[data-current-page="home"] .chat-messages{inset:112px 0 0}}
 body.dark.conversation-active[data-current-page="home"] .chat-messages,body:not(.dark).conversation-active[data-current-page="home"] .chat-messages{inset:122px 0 0}
 @media(max-width:760px){body.dark.conversation-active[data-current-page="home"] .chat-messages,body:not(.dark).conversation-active[data-current-page="home"] .chat-messages{inset:112px 0 0}}
+
+/* Mobile touch targets: keep primary controls comfortable without changing desktop density. */
+@media(max-width:760px){
+  body.dark #mobileMenu,body:not(.dark) #mobileMenu{width:44px;height:44px;left:10px;top:9px}
+  body.dark .breadcrumb,body:not(.dark) .breadcrumb{margin-left:64px}
+  body.dark .composer-plus,body:not(.dark) .composer-plus,
+  body.dark .send-button,body:not(.dark) .send-button{width:44px;height:44px;min-width:44px;min-height:44px}
+  body.dark[data-current-page="home"] .quick-prompts .prompt-chip,body:not(.dark)[data-current-page="home"] .quick-prompts .prompt-chip{min-height:44px}
+  body.dark[data-current-page="home"]:not(.conversation-active) .chat-card .chat-tools,body:not(.dark)[data-current-page="home"]:not(.conversation-active) .chat-card .chat-tools{position:relative;top:auto;right:auto;justify-content:flex-end;min-height:44px;margin:0 0 6px}
+  body[data-current-page="home"] #clearChat,body[data-current-page="home"] #regenerateChat{min-height:44px}
+  body.dark .outline-button,body:not(.dark) .outline-button,body.dark .view-map-button,body:not(.dark) .view-map-button{min-height:44px}
+  body.dark .preference-options label,body:not(.dark) .preference-options label{min-height:44px}
+}
