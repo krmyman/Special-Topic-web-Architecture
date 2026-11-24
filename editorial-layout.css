@@ -1,0 +1,137 @@
+/* Editorial architecture adapted from ChatgptDESIGN.md for Tea Sense.
+   Keep behavior and DOM hooks in the existing files; this layer reshapes presentation only. */
+:root {
+  --paper: #fff;
+  --white: #fff;
+  --ink: #171717;
+  --muted: #626262;
+  --line: rgba(0, 0, 0, .13);
+  --green: #547b61;
+  --green-dark: #294d37;
+  --green-soft: #f2f5f1;
+  --gold-soft: #f7f4ec;
+  --rose: #8b5d58;
+  --shadow: none;
+  --font: 'DM Sans', 'Noto Sans TC', system-ui, sans-serif;
+}
+
+body { background: var(--paper); color: var(--ink); font-size: calc(16px * var(--font-scale, 1)); }
+body.dark {
+  --paper: #171717;
+  --white: #202020;
+  --ink: #f2f2f2;
+  --muted: #b3b3b3;
+  --line: rgba(255, 255, 255, .16);
+  --green: #a8bea9;
+  --green-dark: #d6e5d7;
+  --green-soft: #252b26;
+  --gold-soft: #2b2924;
+  --rose: #d4a19a;
+  --shadow: none;
+  background: var(--paper);
+}
+
+/* Desktop information architecture: brand and destinations share a quiet top rail. */
+@media (min-width: 761px) {
+  .sidebar, body.dark .sidebar, body:not(.dark) .sidebar {
+    position: sticky; inset: 0 0 auto; z-index: 30; width: 100%; height: 64px;
+    min-height: 64px; padding: 0 clamp(20px, 4vw, 56px); display: flex;
+    flex-direction: row; align-items: center; gap: 28px; overflow: visible;
+    transform: none; border: 0; border-bottom: 1px solid var(--line);
+    background: var(--paper); box-shadow: none; transition: none;
+  }
+  .sidebar-toggle { display: none !important; }
+  .brand, body.dark .brand, body:not(.dark) .brand {
+    width: auto; height: 44px; margin: 0; padding: 0; justify-content: flex-start;
+    gap: 10px; flex: none;
+  }
+  .brand-mark, body.dark .brand-mark { width: 34px; height: 34px; border-radius: 50%; background: var(--ink); color: var(--paper); clip-path: none; font-size: 16px; }
+  .brand-copy { display: grid !important; gap: 1px; }
+  .brand-copy strong { color: var(--ink); font-size: 16px; font-weight: 600; }
+  .brand-copy small { color: var(--muted); font-size: 9px; letter-spacing: .12em; }
+  .side-label, .mini-note, .app-version { display: none !important; }
+  .side-nav, body.dark .side-nav, body:not(.dark) .side-nav {
+    width: auto; display: flex; flex-direction: row; align-items: center; gap: 4px;
+    margin: 0; padding: 0;
+  }
+  .nav-link, body.dark .nav-link, body:not(.dark) .nav-link {
+    width: auto; height: 44px; min-width: 44px; margin: 0; padding: 0 13px;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    border: 0; border-radius: 999px; background: transparent; color: var(--muted);
+    font-size: 14px; font-weight: 500; line-height: 1;
+  }
+  .nav-link:hover { background: color-mix(in srgb, var(--ink) 5%, transparent); color: var(--ink); }
+  .nav-link.active { background: color-mix(in srgb, var(--ink) 7%, transparent); color: var(--ink); }
+  .nav-icon, body.dark .nav-icon { display: none; }
+  .sidebar-bottom, body.dark .sidebar-bottom, body:not(.dark) .sidebar-bottom {
+    width: auto; display: flex; flex-direction: row; align-items: center; gap: 0;
+    margin: 0 0 0 auto;
+  }
+  .profile-button, body:not(.sidebar-expanded) .profile-button, body.sidebar-expanded .profile-button {
+    width: auto; height: 44px; margin: 0; padding: 0 12px; border: 1px solid var(--line);
+    border-radius: 999px; background: transparent; justify-content: flex-start; gap: 9px;
+  }
+  .profile-button>span:not(.avatar) { display: none !important; }
+  .avatar { width: 25px; height: 25px; }
+  .profile-more { display: none !important; }
+  .main-area, body.dark .main-area, body:not(.dark) .main-area {
+    min-width: 0; margin: 0; background: var(--paper);
+  }
+  .topbar, body.dark .topbar, body:not(.dark) .topbar {
+    height: 48px; padding: 0 clamp(24px, 5vw, 72px); border: 0; background: var(--paper);
+  }
+  .content-wrap { width: min(1200px, 100%); margin: 0 auto; padding: 24px clamp(24px, 5vw, 72px) 80px; }
+  .page { min-height: calc(100vh - 120px); }
+  .page-intro { margin-bottom: 36px; }
+  .eyebrow { color: var(--muted); font-size: 13px; letter-spacing: .06em; }
+  .eyebrow-line { background: var(--line); }
+  h1, .welcome-row h1 { color: var(--ink); font-size: clamp(34px, 4vw, 48px); font-weight: 500; letter-spacing: -.035em; line-height: 1.16; }
+  h2 { color: var(--ink); font-weight: 500; letter-spacing: -.02em; }
+  .serif-accent { color: inherit; }
+  .lead { max-width: 650px; color: var(--muted); font-size: 17px; line-height: 1.65; }
+  .card, body.dark .card, body.dark .rank-item {
+    border: 1px solid var(--line); border-radius: 6px; background: var(--white);
+    box-shadow: none; color: var(--ink);
+  }
+  .news-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 28px; }
+  .news-card { overflow: hidden; border: 0; border-radius: 6px; background: transparent; box-shadow: none; }
+  .news-image { border-radius: 6px; }
+  .news-copy { padding: 14px 0 0; }
+  .news-copy h2 { font-size: 22px; line-height: 1.3; }
+  .news-copy p { color: var(--muted); font-size: 16px; line-height: 1.6; }
+  .ranking-panel { padding: 20px; }
+  .rank-item { border-radius: 6px; }
+  .composer { border: 1px solid var(--line); border-radius: 999px; box-shadow: none; background: var(--white); }
+  .composer:focus-within { outline: 2px solid var(--green); outline-offset: 2px; }
+  .send-button, .primary-button, .apply-button { background: var(--ink); color: var(--paper); border-radius: 999px; }
+  .outline-button, .prompt-chip, .recommendation-actions button, .graph-drinks button {
+    border-radius: 999px; border-color: var(--line); background: transparent; color: var(--ink);
+  }
+  button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible,
+  [tabindex]:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+  body.dark .news-copy h2, body.dark .rank-copy strong, body.dark .place-copy strong,
+  body.dark .section-heading h2, body.dark .map-topline strong, body.dark .graph-toolbar strong { color: var(--ink); }
+  body.dark .news-copy p, body.dark .rank-copy small, body.dark .place-copy small,
+  body.dark .map-disclaimer, body.dark .source-note { color: var(--muted); }
+  body.dark[data-current-page="home"] .chat-card { background: transparent; }
+  body.dark[data-current-page="home"] .welcome-row h1 { color: var(--ink); }
+  body.dark[data-current-page="home"] .welcome-row .lead { color: var(--muted); }
+}
+
+/* Keep the existing mobile drawer while aligning surfaces, type and controls. */
+@media (max-width: 760px) {
+  body { font-size: calc(16px * var(--font-scale, 1)); }
+  .sidebar, body.dark .sidebar { background: var(--paper); border-right: 1px solid var(--line); }
+  .nav-link, body.dark .nav-link { min-height: 44px; }
+  .content-wrap { max-width: 760px; }
+  .news-grid { grid-template-columns: 1fr; gap: 24px; }
+  .news-copy { padding: 12px 0 0; }
+  .news-copy h2 { font-size: 19px; }
+  .news-copy p { font-size: 16px; }
+  .weather-pill { background: var(--white); border: 1px solid var(--line); box-shadow: none; }
+  body.dark .topbar { background: var(--paper); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}

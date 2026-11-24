@@ -1,5 +1,14 @@
 # Tea Sense visual system
 
+## Information architecture and editorial layout
+
+- Desktop navigation uses a 64px top rail with the brand, five primary destinations, and account/settings access. The mobile layout keeps the compact slide-out navigation.
+- Main content is centered at a maximum width of 1200px. Use whitespace and clear type hierarchy to separate sections; reserve bordered surfaces for interactive or data-heavy areas.
+- News uses a two-column editorial layout on wide screens and a single column on phones. Ranking, map, and flavor graph keep their existing data tools and interactions.
+- Use a neutral paper/charcoal foundation, with tea green reserved for meaningful selected, focus, and category states. The dark theme follows the same neutral surfaces and semantic contrast.
+- Body copy starts at 16px, controls have visible keyboard focus, and mobile navigation/actions retain at least 44px touch targets. Honor `prefers-reduced-motion`.
+- `editorial-layout.css` is the presentation override layer for this structure. Keep behavior, data, and stable DOM hooks in `app.js`, `data.js`, `i18n.js`, and `index.html`.
+
 ## Foundations
 
 - **Canvas and surfaces:** `--paper`, `--white`, `--line`; night theme overrides these tokens through `body.dark`.
